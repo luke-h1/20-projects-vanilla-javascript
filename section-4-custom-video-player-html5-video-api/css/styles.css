@@ -61,7 +61,8 @@ h1 {
 }
 
 .controls .fa-pause {
-  color: #fff;
+  color: #fff; 
+  margin-right: 10px;
 
 }
 
