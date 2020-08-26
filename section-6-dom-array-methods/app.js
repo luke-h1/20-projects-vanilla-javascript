@@ -32,9 +32,16 @@ function doubleMoney() {
 }
 
 // SORT USERS BY RICHEST
-function sortByRichest(){
-  data.sort((a,b) => b.money - a.money); 
+function sortByRichest() {
+  data.sort((a, b) => b.money - a.money);
   updateDOM();
+}
+
+
+// FILTER BY ONLY MILLIONAIRES 
+function filterByMillionaires(){
+  data = data.filter(user => user.money > 1000000); 
+  updateDOM(); 
 }
 
 // Add New Obj to data array
@@ -56,6 +63,8 @@ function updateDOM(providedData = data) {
   });
 }
 
+
+
 // https://stackoverflow.com/questions/149055/how-to-format-numbers-as-currency-string
 // *****THIRD ANSWER******
 // FORMAT CURRENCY
@@ -70,6 +79,7 @@ function formatCurrency(number) {
 addUserBtn.addEventListener('click', getRandomUser);
 doubleBtn.addEventListener('click', doubleMoney);
 sortBtn.addEventListener('click', sortByRichest);
+showMillionairesBtn.addEventListener('click', filterByMillionaires); 
 
 // MAP EXAMPLE
 // RUNS FUNCTION ON EACH ITEM ON ARRAY & MANIPULATE
@@ -96,3 +106,14 @@ const sortedArr = arr5.sort((a, b) => {
   return b - a; // high to low
 });
 console.log(sortedArr);
+
+
+// FILTER EXAMPLE:
+// returns an array just like map 
+const arr6 = [20, 23, 25, 30, 21, 50, 60]; 
+const under30 = arr6.filter((item) => {
+  return item < 30; // returns items in array that are less than 30
+})
+console.log(under30);
+
+
