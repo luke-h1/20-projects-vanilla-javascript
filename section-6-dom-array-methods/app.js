@@ -23,14 +23,24 @@ async function getRandomUser() {
   addData(newUser);
 }
 
-
-// DOUBLE EVERYONE'S MONEY 
-function doubleMoney(){
+// DOUBLE EVERYONE'S MONEY
+function doubleMoney() {
   data = data.map((user) => {
-    return { ...user, money: user.money * 2 } // SPREAD OP 
-    
+    return { ...user, money: user.money * 2 }; // SPREAD OP
+  });
+  updateDOM();
+}
 
-  }); 
+// SORT USERS BY RICHEST
+function sortByRichest() {
+  data.sort((a, b) => b.money - a.money);
+  updateDOM();
+}
+
+
+// FILTER BY ONLY MILLIONAIRES 
+function filterByMillionaires(){
+  data = data.filter(user => user.money > 1000000); 
   updateDOM(); 
 }
 
@@ -53,6 +63,8 @@ function updateDOM(providedData = data) {
   });
 }
 
+
+
 // https://stackoverflow.com/questions/149055/how-to-format-numbers-as-currency-string
 // *****THIRD ANSWER******
 // FORMAT CURRENCY
@@ -64,18 +76,10 @@ function formatCurrency(number) {
 // }
 
 // EVENT LISTENRES
-addUserBtn.addEventListener('click', getRandomUser); 
-doubleBtn.addEventListener('click', doubleMoney); 
-
-
-
-
-
-
-
-
-
-
+addUserBtn.addEventListener('click', getRandomUser);
+doubleBtn.addEventListener('click', doubleMoney);
+sortBtn.addEventListener('click', sortByRichest);
+showMillionairesBtn.addEventListener('click', filterByMillionaires); 
 
 // MAP EXAMPLE
 // RUNS FUNCTION ON EACH ITEM ON ARRAY & MANIPULATE
@@ -91,3 +95,25 @@ const arr4 = arr3.map((item) => {
 });
 
 console.log(arr4);
+
+// SORT EXAMPLE
+// SORTS ELS OF AN ARR IN PLACE & RETURNS THE SORTED ARRAY.
+// DEFAULT SORT = ASC BUILT UPON CONVERTING THE ELEMENTS INTO STRINGS THEN COMPARING THEIR SEQUENCES OF UTF-16 CODE UNIT VALUES.
+
+const arr5 = [1, 2, 110, 3, 4, 330];
+const sortedArr = arr5.sort((a, b) => {
+  // return a - b; // low to highest numerical order
+  return b - a; // high to low
+});
+console.log(sortedArr);
+
+
+// FILTER EXAMPLE:
+// returns an array just like map 
+const arr6 = [20, 23, 25, 30, 21, 50, 60]; 
+const under30 = arr6.filter((item) => {
+  return item < 30; // returns items in array that are less than 30
+})
+console.log(under30);
+
+
