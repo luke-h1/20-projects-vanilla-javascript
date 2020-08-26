@@ -23,6 +23,17 @@ async function getRandomUser() {
   addData(newUser);
 }
 
+
+// DOUBLE EVERYONE'S MONEY 
+function doubleMoney(){
+  data = data.map((user) => {
+    return { ...user, money: user.money * 2 } // SPREAD OP 
+    
+
+  }); 
+  updateDOM(); 
+}
+
 // Add New Obj to data array
 function addData(obj) {
   data.push(obj);
@@ -43,8 +54,7 @@ function updateDOM(providedData = data) {
 }
 
 // https://stackoverflow.com/questions/149055/how-to-format-numbers-as-currency-string
-// *****third answer******
-
+// *****THIRD ANSWER******
 // FORMAT CURRENCY
 function formatCurrency(number) {
   return '£' + number.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
@@ -53,6 +63,31 @@ function formatCurrency(number) {
 //   providedData[i].name;
 // }
 
+// EVENT LISTENRES
+addUserBtn.addEventListener('click', getRandomUser); 
+doubleBtn.addEventListener('click', doubleMoney); 
 
-// EVENT LISTENRES 
-addUserBtn.addEventListener('click', getRandomUser);
+
+
+
+
+
+
+
+
+
+
+// MAP EXAMPLE
+// RUNS FUNCTION ON EACH ITEM ON ARRAY & MANIPULATE
+const arr = [1, 2, 3, 4, 5];
+const arr2 = arr.map((item) => {
+  return `Number: ${item}`;
+});
+console.log(arr2);
+
+const arr3 = [1, 2, 3, 4, 5];
+const arr4 = arr3.map((item) => {
+  return item * 2;
+});
+
+console.log(arr4);
