@@ -8,12 +8,16 @@ const finalMessage = document.getElementById('final-message');
 const figureParts = document.querySelectorAll('.figure-part'); // svgs
 
 const words = [
-  // 'application',
-  // 'collection',
-  // 'react',
-  // 'nodejs',
-  // 'javascript',
-  'github',
+  'application',
+  'collection',
+  'react',
+  'nodejs',
+  'javascript', 
+  'deno',
+  'vue', 
+  'Apple',
+  'UK', 
+  'github' 
 ];
 
 let selectedWord = words[Math.floor(Math.random() * words.length)];
@@ -44,16 +48,35 @@ function displayWord() {
 
 // UPDATE WRONG LETTERS
 function updateWrongLettersEl() {
-  console.log('Update Wrong')
+  // Dislay the
+  wrongLettersEl.innerHTML = `
+  ${wrongLetters.length > 0 ? '<p>Wrong</p>' : ''} 
+  ${wrongLetters.map((letter) => `<span>${letter}</span>`)} 
+  `;
+  // deal with hangman figure svg parts
+  figureParts.forEach((element, index) => {
+    const error = wrongLetters.length;
+    if (index < error) {
+      element.style.display = 'block';
+    } else {
+      element.style.display = 'none';
+    }
+  });
+  if (wrongLetters.length == figureParts.length) {
+    finalMessage.innerText = 'You Lost ❌';
+    popup.style.display = 'flex';
+  }
 }
 
+// Check if user has lost
 
-// show notification 
-function showNotification(){
-  notification.classList.add('show'); 
-  setTimeout(() =>{
-    notification.classList.remove('show')
-  }, 2000)
+
+// show notification
+function showNotification() {
+  notification.classList.add('show');
+  setTimeout(() => {
+    notification.classList.remove('show');
+  }, 2000);
 }
 
 // KeyDown letter press event listener
@@ -76,6 +99,17 @@ window.addEventListener('keydown', (e) => {
       }
     }
   }
+});
+
+// restart the game + Play again
+playAgainBtn.addEventListener('click', () => {
+  // empty arrays
+  correctLetters.splice(0);
+  wrongLetters.splice(0);
+  selectedWord = words[Math.floor(Math.random() * words.length)];
+  displayWord();
+  updateWrongLettersEl(); // clean wrong letters & clean svg
+  popup.style.display = 'none'; // hide popup
 });
 
 displayWord();
