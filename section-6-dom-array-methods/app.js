@@ -37,11 +37,10 @@ function sortByRichest() {
   updateDOM();
 }
 
-
-// FILTER BY ONLY MILLIONAIRES 
-function filterByMillionaires(){
-  data = data.filter(user => user.money > 1000000); 
-  updateDOM(); 
+// FILTER BY ONLY MILLIONAIRES
+function filterByMillionaires() {
+  data = data.filter((user) => user.money > 1000000);
+  updateDOM();
 }
 
 // Add New Obj to data array
@@ -63,8 +62,6 @@ function updateDOM(providedData = data) {
   });
 }
 
-
-
 // https://stackoverflow.com/questions/149055/how-to-format-numbers-as-currency-string
 // *****THIRD ANSWER******
 // FORMAT CURRENCY
@@ -75,11 +72,22 @@ function formatCurrency(number) {
 //   providedData[i].name;
 // }
 
+// REDUCER FUNCTION
+function calculateWealth() {
+  const wealth = data.reduce((acc, user) => (acc += user.money), 0);
+  const formattedWealth = formatCurrency(wealth);
+  console.log(formattedWealth);
+  const wealthEl = document.createElement('div');
+  wealthEl.innerHTML = `<h3>Total Wealth: ${formattedWealth}`;
+  main.appendChild(wealthEl);
+}
+
 // EVENT LISTENRES
 addUserBtn.addEventListener('click', getRandomUser);
 doubleBtn.addEventListener('click', doubleMoney);
 sortBtn.addEventListener('click', sortByRichest);
-showMillionairesBtn.addEventListener('click', filterByMillionaires); 
+showMillionairesBtn.addEventListener('click', filterByMillionaires);
+calculateWealthBtn.addEventListener('click', calculateWealth);
 
 // MAP EXAMPLE
 // RUNS FUNCTION ON EACH ITEM ON ARRAY & MANIPULATE
@@ -107,13 +115,18 @@ const sortedArr = arr5.sort((a, b) => {
 });
 console.log(sortedArr);
 
-
 // FILTER EXAMPLE:
-// returns an array just like map 
-const arr6 = [20, 23, 25, 30, 21, 50, 60]; 
+// returns an array just like map
+const arr6 = [20, 23, 25, 30, 21, 50, 60];
 const under30 = arr6.filter((item) => {
   return item < 30; // returns items in array that are less than 30
-})
+});
 console.log(under30);
 
+// REDUCE
+// The reduce method executes a reducer function (that you provide) on each element in the array, resultiing in a single output value.
 
+const arr7 = [1, 2, 3, 4, 5];
+
+const total = arr7.reduce((acc, curVal) => acc + curVal, 0); // start at 0
+console.log(total); // 15

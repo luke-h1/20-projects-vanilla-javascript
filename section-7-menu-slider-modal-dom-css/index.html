@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+      integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
+      crossorigin="anonymous"
+    />
+    <title>Landing Page</title>
+  </head>
+  <body>
+    <nav>
+      <div class="logo">
+        <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="user" />
+      </div>
+      <ul>
+        <li a href="#">Home</li>
+        <li a href="#">Portfolio</li>
+        <li a href="#">Blog</li>
+        <li a href="#">Contact</li>
+      </ul>
+    </nav>
+    <header>
+      <button id="toggle" class="toggle">
+        <i class="fa fa-bars fa-2x"></i>
+      </button>
+      <h1>Landing Page</h1>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente,
+        quod.
+      </p>
+      <button class="cta-btn" id="open">Sign up</button>
+    </header>
+    <div class="container">
+      <h2>Lorem ipsum dolor sit amet.</h2>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam
+        corporis autem nulla delectus, rerum laborum magni voluptate facere
+        earum eius. Dignissimos pariatur aliquid, unde sed tempore voluptas aut
+        quam incidunt.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis atque ad
+        minus. Numquam, ratione! A libero odio illo dolore est?
+      </p>
+      <h2>Lorem ipsum dolor sit amet.</h2>
+      <p>
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor quod
+        facere ullam mollitia nulla vel deserunt voluptatem id nostrum
+        voluptatum unde est tempore adipisci, veritatis corporis doloribus
+        quaerat incidunt? Commodi, dolorum. Ex sed eveniet vel. Voluptates vero
+        ad nisi eius!
+      </p>
+      <h2>Lorem</h2>
+      <ul>
+        <li>lorem</li>
+        <li>lorem</li>
+        <li>lorem</li>
+        <li>lorem</li>
+      </ul>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus vel
+        suscipit sed corrupti reiciendis, officia tempora ex ipsa eaque? Sint,
+        earum temporibus deleniti explicabo vero, unde dolores eveniet dolorum
+        beatae odio natus laudantium suscipit inventore nostrum est doloremque
+        id optio minima esse aliquam recusandae asperiores debitis. Mollitia,
+        adipisci labore laudantium fuga delectus, corrupti totam, ex possimus
+        atque exercitationem est quibusdam expedita iure similique omnis quis
+        esse veniam asperiores! Recusandae, sed.
+      </p>
+    </div>
+    <div class="modal-container" id="modal">
+      <div class="modal">
+        <button class="close-btn" id="close">
+          <i class="fa fa-times"></i>
+        </button>
+        <div class="modal-header">
+          <h3>Sign up</h3>
+        </div>
+        <div class="modal-content">
+          <p>Register to get offers, support & more...</p>
+          <form class="modal-form">
+            <div>
+              <label for="name">Name</label>
+              <input
+                id="name"
+                type="text"
+                placeholder="enter name"
+                class="form-input"
+              />
+            </div>
+            <div>
+              <label for="email">email</label>
+              <input
+                id="email"
+                type="email"
+                placeholder="enter email"
+                class="form-input"
+              />
+            </div>
+            <div>
+              <label for="password">password</label>
+              <input
+                id="password"
+                type="password"
+                placeholder="enter password"
+                class="form-input"
+              />
+            </div>
+            <div>
+              <label for="password2">confirm password</label>
+              <input
+                id="password2"
+                type="password"
+                placeholder="confirm password"
+                class="form-input"
+              />
+            </div>
+            <input type="submit" value="submit" class="submit-btn" />
+          </form>
+        </div>
+      </div>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
