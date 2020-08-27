@@ -3,11 +3,10 @@ const search = document.getElementById('search'),
   random = document.getElementById('random'),
   mealsEl = document.getElementById('meals'),
   resultHeading = document.getElementById('result-heading'),
-  single_mealEl = document.getElementById('meal'),
+  single_mealEl = document.getElementById('single-meal'),
   errorHeading = document.getElementById('error-heading');
 
 // EVENT LISTENERS
-
 
 function searchMeal(e) {
   e.preventDefault();
@@ -27,7 +26,7 @@ function searchMeal(e) {
             .map(
               (meal) => `
             <div class="meal"> 
-              <img src="${meal.strMealThumb}" alt="${meal.strMeal}" /> 
+              <img src="${meal.strMealThumb}" /> 
               <div class="meal-info" data-mealID="${meal.idMeal}"> 
               <h3>${meal.strMeal}</h3> 
               </div> 
@@ -36,8 +35,8 @@ function searchMeal(e) {
             )
             .join('');
         }
-      
       });
+    search.value = ''; // clear search query
   } else {
     errorHeading.innerHTML = `<h1 class="error">Enter a correct value ❌</h1>`;
     window.setTimeout(() => {
@@ -47,4 +46,3 @@ function searchMeal(e) {
 }
 
 submit.addEventListener('submit', searchMeal);
-
