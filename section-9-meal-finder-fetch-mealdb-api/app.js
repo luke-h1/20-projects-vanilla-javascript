@@ -2,8 +2,8 @@ const search = document.getElementById('search'),
   submit = document.getElementById('submit'),
   random = document.getElementById('random'),
   mealsEl = document.getElementById('meals'),
-  resultHeading = document.getElementById('result-heading');
-
+  resultHeading = document.getElementById('result-heading'),
+  errorHeading = document.getElementById('error-heading');
 // search meal & fetch from API
 function searchMeal(e) {
   e.preventDefault();
@@ -40,11 +40,9 @@ function searchMeal(e) {
       errorHeading.innerHTML = '';
     }, 2000);
   }
-}; 
+}
 
-
-submit.addEventListener('submit', searchMeal); 
-
+submit.addEventListener('submit', searchMeal);
 
 // const search = document.getElementById('search'),
 //   submit = document.getElementById('submit'),
