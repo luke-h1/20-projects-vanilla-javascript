@@ -150,3 +150,10 @@ input[type='number'] {
 .list li:hover .delete-btn { 
   opacity: 1;
 }
+
+.error { 
+  font-weight: 700; 
+  color: red; 
+  text-align: center; 
+  font-size: 30px;
+}

@@ -3,9 +3,9 @@ const moneyPlus = document.getElementById('money-plus');
 const moneyMinus = document.getElementById('money-minus');
 const list = document.getElementById('list');
 const form = document.getElementById('form');
+const h2 = document.getElementById('errorAlert');
 const text = document.getElementById('text');
 const amount = document.getElementById('amount');
-
 const sampleTransactions = [
   {
     id: 1,
@@ -29,7 +29,46 @@ const sampleTransactions = [
   },
 ];
 
+function clrFields() {
+  text.value = '';
+  amount.value = '';
+}
+
+function idGenerator() {
+  return Math.floor(Math.random() * 100);
+}
+
+function errorHandler(message) {
+  h2.innerHTML = message;
+  window.setTimeout(() => {
+    h2.innerHTML = '';
+  }, 2000);
+}
+
 let transactions = sampleTransactions;
+
+function addTransaction(e) {
+  e.preventDefault();
+  if (text.value.trim() === '' || amount.value.trim() === '') {
+    errorHandler('Enter a correct value 🤷‍♂️');
+  } else {
+    const transaction = {
+      id: idGenerator(),
+      text: text.value,
+      amount: parseInt(amount.value),
+    };
+    console.log(transaction);
+    transactions.push(transaction);
+    addTransactionDOM(transaction);
+    updateValues();
+    clrFields();
+  }
+}
+
+function deleteItem(id) {
+  transactions = transactions.filter((transaction) => transaction.id !== id);
+  init();
+}
 
 function addTransactionDOM(transaction) {
   const sign = transaction.amount < 0 ? '-' : '+';
@@ -38,7 +77,9 @@ function addTransactionDOM(transaction) {
 
   itemEl.innerHTML = `
     ${transaction.text}<span>${sign} ${Math.abs(transaction.amount)}</span>
-    <button class="delete-btn"><i class="fa fa-remove"></button> 
+    <button class="delete-btn" id="delete-btn" onClick="deleteTransaction(${
+      transaction.id
+    }"><i class="fa fa-remove"></button> 
   `;
   list.appendChild(itemEl);
 }
@@ -71,3 +112,4 @@ function init() {
 init();
 
 // EVENT LISTENERS
+form.addEventListener('submit', addTransaction);
