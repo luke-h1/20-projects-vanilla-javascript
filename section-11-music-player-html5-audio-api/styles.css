@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: 'Roboto Condensed', sans-serif;
+  background-color: #d6d3f0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+}
+
+.music-container {
+  width: 70%;
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 20px 20px 0 rgba(252, 269, 269, 0.6);
+  display: flex;
+  padding: 20px 30px;
+  position: relative;
+  margin: 100px;
+  z-index: 10;
+}
+
+.img-container {
+  position: relative;
+  width: 110px;
+}
+
+.img-container img {
+  border-radius: 50%;
+  object-fit: cover;
+  width: inherit;
+  height: 100px;
+  animation: rotate 3s linear infinite;
+  animation-play-state: paused;
+}
+
+.music-container.play .img-container img {
+  animation-play-state: running;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@-moz-keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+@-webkit-keyframes rotate { 
+  from { 
+    transform: rotate(0deg); 
+  }
+  to { 
+    transform: rotate(360deg); 
+  }
+}
+
+.navigation { 
+  display:flex;
+  align-items: center; 
+  justify-content: center;
+  z-index: 1;
+}
+
+.action-btn { 
+  background-color: #fff;
+  border:0; 
+  color: #dfdbdf; 
+  font-size: 25px;
+  cursor: pointer;
+  padding: 10px; 
+  margin: 0 20px;
+}
+
+.action-btn.action-btn-big { 
+  color: #cdc2d0; 
+  font-size: 30px;
+}
+
+.action-btn:focus { 
+  outline: none;
+}
