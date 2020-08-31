@@ -28,7 +28,17 @@ const words = [
 ];
 let randomWord; // init ran word
 let score = 0; // init score
-let time = 5; // init time
+let time = 15; // init time
+
+let difficulty =
+  localStorage.getItem('difficultyLevel') !== null
+    ? localStorage.getItem('difficultyLevel')
+    : 'easy';
+
+difficultySelect.value =
+  localStorage.getItem('difficultyLevel') !== null
+    ? localStorage.getItem('difficultyLevel')
+    : 'easy';
 
 text.focus(); // focus on input when user first enters page
 
@@ -78,12 +88,23 @@ text.addEventListener('input', (e) => {
     addToDom();
     updateScore();
     e.target.value = '';
-    time += 3;
+    if (difficulty === 'hard') {
+      time += 2;
+    } else if (difficulty === 'medium') {
+      time += 3;
+    } else {
+      time += 4;
+    }
+
     updateTime();
   }
 });
 
-
 settingsBtn.addEventListener('click', () => {
   settings.classList.toggle('hide');
-})
+});
+
+settingsForm.addEventListener('change', (e) => {
+  difficulty = e.target.value;
+  localStorage.setItem('difficultyLevel', difficulty);
+});
