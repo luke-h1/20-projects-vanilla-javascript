@@ -1,6 +1,6 @@
 const main = document.querySelector('main');
 const voicesSelect = document.getElementById('voices');
-const textarea = document.getElementById('text');
+const textArea = document.getElementById('text');
 const readBtn = document.getElementById('read');
 const toggleBtn = document.getElementById('toggle');
 const closeBtn = document.getElementById('close');
@@ -58,6 +58,16 @@ const data = [
 
 data.forEach(createBox);
 
+// set txt msg
+function setTextMessage(text) {
+  message.text = text;
+}
+
+// speak text
+function speakText() {
+  speechSynthesis.speak(message);
+}
+
 // create speech boxes
 function createBox(item) {
   const box = document.createElement('div');
@@ -67,6 +77,51 @@ function createBox(item) {
   <img src="${image}" alt="${text}"/>
   <p class="info">${text}</p> 
   `;
-  // @todo - speak event
+  box.addEventListener('click', () => {
+    setTextMessage(text);
+    speakText();
+    box.classList.add('active');
+    setTimeout(() => {
+      box.classList.remove('active');
+    }, 900);
+  });
   main.appendChild(box);
 }
+
+let voices = []; // store voices in array
+const message = new SpeechSynthesisUtterance(); // init speech synth
+
+function getVoices() {
+  voices = speechSynthesis.getVoices();
+  voices.forEach((voice) => {
+    const option = document.createElement('option');
+    option.value = voice.name;
+    option.innerText = `${voice.name} ${voice.lang}`;
+    voicesSelect.appendChild(option);
+  });
+}
+
+function setVoice(e) {
+  message.voice = voices.find((voice) => voice.name === e.target.value);
+}
+
+// EVENT LISTENERS
+speechSynthesis.addEventListener('voiceschanged', getVoices);
+getVoices();
+
+// Toggle text box
+toggleBtn.addEventListener('click', () => {
+  document.getElementById('text-box').classList.toggle('show');
+});
+
+// toggle close btn
+closeBtn.addEventListener('click', () => {
+  document.getElementById('text-box').classList.remove('show');
+});
+
+voicesSelect.addEventListener('change', setVoice);
+
+readBtn.addEventListener('click', () => {
+  setTextMessage(textArea.value);
+  speakText();
+});
