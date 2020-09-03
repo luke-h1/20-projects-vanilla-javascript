@@ -13,7 +13,7 @@ const ball = {
   x: canvas.width / 2, // put in middle horizontally on x axis
   y: canvas.height / 2,
   size: 10,
-  speed: 4,
+  speed: 8,
   dx: 4, // speed of direction on x axis
   dy: -4,
 };
@@ -39,6 +39,70 @@ const brickInfo = {
   visible: true,
 };
 
+function increaseScore() {
+  score++;
+  if (score % (brickRowCount * brickRowCount) === 0) {
+    showAllBricks();
+  }
+}
+
+function showAllBricks() {
+  bricks.forEach((column) => {
+    column.forEach((brick) => {
+      brick.visible = true;
+    });
+  });
+}
+
+function moveBall() {
+  ball.x += ball.dx;
+  ball.y += ball.dy;
+
+  // wall collision detection (x axis) (right/left)
+  if (ball.x + ball.size > canvas.width || ball.x - ball.size < 0) {
+    ball.dx *= -1; // *= - ball.dx = ball.dx * -1
+  }
+
+  // wall collision detection (y axis) (top/bottom)
+  if (ball.y + ball.size > canvas.height || ball.y - ball.size < 0) {
+    ball.dy *= -1; // *= - ball.dy = ball.dy * -1
+  }
+  console.log(`Ball X: ${ball.x} ball Y: ${ball.y}`);
+
+  // Paddle collision
+  if (
+    ball.x - ball.size > paddle.x &&
+    ball.x + ball.size < paddle.x + paddle.w &&
+    ball.y + ball.size > paddle.y
+  ) {
+    ball.dy = -ball.speed;
+  }
+
+  // bricks collision
+  bricks.forEach((column) => {
+    column.forEach((brick) => {
+      if (brick.visible) {
+        if (
+          ball.x - ball.size > brick.x && // left brick side
+          ball.x + ball.size < brick.x + brick.w && // right brick side
+          ball.y + ball.size > brick.y && // top brick side
+          ball.y - ball.size < brick.y + brick.h // bottom brick side
+        ) {
+          ball.dy *= -1;
+          brick.visible = false;
+          increaseScore();
+        }
+      }
+    });
+  });
+  // hit bottom wall - lose
+
+  if (ball.y + ball.size > canvas.height) {
+    showAllBricks();
+    score = 0;
+  }
+}
+
 // create bricks
 const bricks = [];
 
@@ -57,7 +121,7 @@ function drawBricks() {
     column.forEach((brick) => {
       ctx.beginPath();
       ctx.rect(brick.x, brick.y, brick.w, brick.h);
-      ctx.fillStyle = brick.visivle ? '#0095dd' : '#0095dd'; // need to fix this
+      ctx.fillStyle = brick.visible ? '#0095dd' : 'transparent';
       ctx.fill();
       ctx.closePath();
     });
@@ -123,6 +187,7 @@ function keyUp(e) {
 
 // update canvasa drawing & animation
 function update() {
+  moveBall();
   movePaddle();
   draw(); // draw everything
   requestAnimationFrame(update); // req animation frame
